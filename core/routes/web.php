@@ -52,3 +52,4 @@ Route::delete('/vehiculos/{vehicle}/eliminar/', [VehicleController::class, 'dele
 
 //al hacer el post tanto si pongo nuevo como si no, no pasa nada, no? en una url puede haver un get, un post, un delete
 // o puede darse a confucsion si utilizo Route::get('/vehiculos/', y Route::post('/vehiculos/', ?
+
