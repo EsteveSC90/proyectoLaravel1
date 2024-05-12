@@ -45,6 +45,7 @@ Route::delete('/vendedores/{seller}/eliminar/', [SellerController::class, 'delet
 
 // VEHICLES
 Route::get('/vehiculos/', [VehicleController::class, 'list'])->name('vehicles.list'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
+Route::get('/vehiculos/busqueda', [VehicleController::class, 'search'])->name('vehicles.search'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
 Route::get('/vehiculos/{vehicle}', [VehicleController::class, 'get'])->name('vehicles.get');
 Route::post('/vehiculos/nuevo/', [VehicleController::class, 'add'])->name('vehicles.add');
 Route::put('/vehiculos/{vehicle}/actualizar/', [VehicleController::class, 'edit'])->name('vehicles.edit');

@@ -6,6 +6,8 @@ use App\Models\Car;
 use App\Models\Sell;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class VehicleController extends Controller
@@ -16,6 +18,31 @@ class VehicleController extends Controller
 
         $columns = Schema::getColumnListing('vehicles');
         $vehicles = Vehicle::all();
+        // return view('vehicles.list', ['vehicles' => $vehicles]);
+        return view('vehicles.list', compact('columns', 'vehicles'));
+    }
+
+    public function search(Request $request)
+    {
+        $value = $request->query->get('search');
+
+        //$v = DB::table('vehicles')->where('registration', $value)->get();
+        //$v = Vehicle::query()->where('registration', $value)->get();
+        // Más frecuente
+        $vehicles = Vehicle::where('registration', $value)->get();
+        // SELECT * FROM vehicles WHERE registration = $value;
+        //$v2 = Vehicle::all()->where('registration', $value);
+        // SELECT * FROM vehicles;
+        // $v => filtro WHERE
+        //DB::table('vehicles')->
+        //$v = Vehicle::all()->where('registration', $value);
+        // SELECT * FROM vehicles where type = '$value' AND brand = '$value';
+
+
+        // SELECT * FROM vehicles WHERE registration = '101010';
+        // SELECT * FROM vehicles WHERE registration LIKE '%pepe%';
+
+        $columns = Schema::getColumnListing('vehicles');
         // return view('vehicles.list', ['vehicles' => $vehicles]);
         return view('vehicles.list', compact('columns', 'vehicles'));
     }

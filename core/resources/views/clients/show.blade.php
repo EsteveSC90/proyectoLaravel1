@@ -12,8 +12,17 @@
         <h3 style="text-align: center">Client</h3>
         <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <h6>Por favor corrige los siguiente errores:</h6>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-
                     <form action="{{ route('clients.edit', $client) }}" method="POST">
                         @csrf
                         @method('PUT')
