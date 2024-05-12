@@ -41,6 +41,13 @@ class ClientController extends Controller
         return view('clients.list', compact('columns', 'clients'));
     }
 
+    public function search(Request $request)
+    {
+        $value = $request->query->get('search');
+        $clients = Client::where('dni', $value)->get();
+        $columns = Schema::getColumnListing('clients');
+        return view('clients.list', compact('columns', 'clients'));
+    }
 
     public function get($id)
     {

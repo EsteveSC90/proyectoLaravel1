@@ -26,6 +26,13 @@ class SellerController extends Controller
         return view('sellers.list', compact('columns', 'sellers'));
     }
 
+    public function search(Request $request)
+    {
+        $value = $request->query->get('search');
+        $sellers = Seller::where('dni', $value)->get();
+        $columns = Schema::getColumnListing('seller');
+        return view('sellers.list', compact('columns', 'sellers'));
+    }
 
     public function get($id)
     {

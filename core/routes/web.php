@@ -31,6 +31,7 @@ Route::get('/mostrar-prueba2/{mensaje}', function($mensaje) { return view('prueb
 //  maestro-detalles
 // CLIENTS
 Route::get('/clientes/', [ClientController::class, 'list'])->name('clients.list'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
+Route::get('/clientes/busqueda', [ClientController::class, 'search'])->name('clients.search');
 Route::get('/clientes/{client}/', [ClientController::class, 'get'])->name('clients.get');
 Route::post('/clientes/nuevo/', [ClientController::class, 'add'])->name('clients.add');
 Route::put('/clientes/{client}/actualizar/', [ClientController::class, 'edit'])->name('clients.edit');
@@ -38,6 +39,7 @@ Route::delete('/clientes/{client}/eliminar/', [ClientController::class, 'delete'
 
 // SELLERS
 Route::get('/vendedores/', [SellerController::class, 'list'])->name('sellers.list'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
+Route::get('/vendedores/busqueda', [SellerController::class, 'search'])->name('sellers.search');
 Route::get('/vendedores/{seller}', [SellerController::class, 'get'])->name('sellers.get');
 Route::post('/vendedores/nuevo/', [SellerController::class, 'add'])->name('sellers.add');
 Route::put('/vendedores/{seller}/actualizar/', [SellerController::class, 'edit'])->name('sellers.edit');
