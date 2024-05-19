@@ -86,6 +86,7 @@
                         @endforeach
                     </table>
                 </div>
+                {{ $sellers->links('pagination.custom') }}
             </main>
         </div>
     </div>

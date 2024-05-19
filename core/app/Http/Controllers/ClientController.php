@@ -36,8 +36,9 @@ class ClientController extends Controller
     public function list()
     {
         $columns = Schema::getColumnListing('clients');
-        $clients = Client::all(); // Suponiendo que estás utilizando el modelo Client para acceder a los datos de los clientes
-//        return view('clients.list', ['clients' => $clients]);
+        // $clients = Client::all(); // Suponiendo que estás utilizando el modelo Client para acceder a los datos de los clientes los coges a todos
+        $clients = Client::paginate(5); //Obtener los clientes paginados
+        //        return view('clients.list', ['clients' => $clients]);
         return view('clients.list', compact('columns', 'clients'));
     }
 

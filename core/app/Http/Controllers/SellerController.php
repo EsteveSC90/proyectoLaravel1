@@ -21,7 +21,8 @@ class SellerController extends Controller
     public function list()
     {
         $columns = Schema::getColumnListing('sellers');
-        $sellers = Seller::all();
+        // $sellers = Seller::all(); // Obtener todos los vendedores
+        $sellers = Seller::paginate(5); //Obtener los vendedores paginados
         // return view('sellers.list', ['sellers' => $sellers]);
         return view('sellers.list', compact('columns', 'sellers'));
     }

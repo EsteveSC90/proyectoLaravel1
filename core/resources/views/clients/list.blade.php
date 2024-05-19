@@ -107,6 +107,7 @@
                         @endforeach
                     </table>
                 </div>
+                {{ $clients->links('pagination.custom') }}
             </main>
         </div>
     </div>
