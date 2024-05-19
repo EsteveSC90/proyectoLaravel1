@@ -4,7 +4,7 @@
 @section('title', "Inicio")
 
 @section('css')
-    <link href=""></link>
+    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
 @endsection
 
 @section('content')
@@ -72,10 +72,14 @@
             </main>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <a href="{{ url('/') }}" class="ml-4 btn btn-primary">Ir a la página de inicio</a>
+                </div>
                 <form action="{{ route('vehicles.search') }}" method="get">
                     <label for="search">Búsqueda</label>
                     <input type="text" name="search" value="{{ $search ?? '' }}" class="input-lg" />
                     <button type="submit" class="ml-4 btn btn btn-danger">Buscar</button>
+                    <a href="{{ route('vehicles.list') }}" class="ml-4 btn btn btn-info">Limpiar</a>
                 </form>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
@@ -128,12 +132,14 @@
                         @endforeach
                     </table>
                 </div>
+                <!-- Mostrar enlaces de paginación -->
+                <!-- <div class="pagination justify-content-center"> -->
+                    <!-- {{ $vehicles->links() }} -->
+                <!-- </div> -->
+
+                {{ $vehicles->links('pagination.custom') }}
             </main>
         </div>
-    </div>
-
-    <div>
-        <a href="{{ url('/') }}" class="ml-4 btn btn-primary">Ir a la página de inicio</a>
     </div>
 
 @endsection

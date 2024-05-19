@@ -1,0 +1,39 @@
+/* Estilo para la paginación */
+
+/* Inicio paginacion */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-item .page-link {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+/* Fin paginacion */

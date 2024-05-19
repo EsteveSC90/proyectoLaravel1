@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\VehicleBuilder;
 use App\Models\Car;
 use App\Models\Sell;
 use App\Models\Vehicle;
@@ -17,7 +18,9 @@ class VehicleController extends Controller
     {
 
         $columns = Schema::getColumnListing('vehicles');
-        $vehicles = Vehicle::all();
+//        $vehicles = Vehicle::all(); // así obtendriamos todos los vehiculos
+        // Obtener los vehículos paginados
+        $vehicles = Vehicle::paginate(5); // Cambia 15 por el número de elementos por página que desees
         // return view('vehicles.list', ['vehicles' => $vehicles]);
         return view('vehicles.list', compact('columns', 'vehicles'));
     }
