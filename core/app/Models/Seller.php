@@ -18,5 +18,8 @@ class Seller extends Model
         'email_address'
     ];
 
+    public function sells() {
+        return $this->hasMany(Sell::class);
+    }
 
 }

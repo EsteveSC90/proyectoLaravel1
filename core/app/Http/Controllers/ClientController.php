@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\MessageTools;
 use App\Models\Client;
+use App\Models\Sell;
 use App\Models\Seller;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;

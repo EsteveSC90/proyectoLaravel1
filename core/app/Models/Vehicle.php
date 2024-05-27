@@ -23,4 +23,8 @@ class Vehicle extends Model
         // Agrega aquí otros atributos que desees permitir en asignación masiva
     ];
 
+    public function sell_lines() {
+        return $this->hasOne(SellLines::class);
+    }
+
 }

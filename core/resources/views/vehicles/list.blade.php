@@ -104,7 +104,6 @@
                             <th>IS AVAILABLE?</th>
                             <th>DETAIL</th>
                         </tr>
-
                         @foreach($vehicles as $vehicle)
                             <tr>
                                 <td>{{ $vehicle->id }}</td>
