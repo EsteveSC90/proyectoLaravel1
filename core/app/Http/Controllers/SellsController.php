@@ -17,7 +17,39 @@ class SellsController extends Controller
 {
     public function list()
     {
-        $sells = Sell::paginate(15);
+
+        $clients = Client::all();
+        foreach($clients as $client) {
+            dd($client->phones->phone1);
+        }
+
+
+
+        //$sells = Sell::paginate(15);
+        $sells = Sell::all();
+        $count = 0;
+        foreach ($sells as $sell) {
+
+            $lines = $sell->lines()->get();
+
+            //dump($lines->sum('total_price'));
+
+            // SELECT SUM(quantity) FROM sells GROUP BY quantity;
+            /*$a = $lines->sum(function ($line) {
+                return $line->quantity * $line->unit_price;
+            });
+            dd($a);*/
+
+            foreach ($lines as $line) {
+                dump($line->vehicle());
+
+//                dump($line->vehicle->registration);
+//                dump($line->vehicle_id);
+            }
+
+            dd("FIN");
+        }
+
         $clients = Client::all();
         $sellers = Seller::all();
         $vehicles = Vehicle::all();

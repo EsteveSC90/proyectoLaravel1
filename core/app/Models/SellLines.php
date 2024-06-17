@@ -9,6 +9,10 @@ class SellLines extends Model
 {
     use HasFactory;
 
+    /**
+     * Campos/atributos del SellLines:
+     * @var string[]
+     */
     protected $fillable = [
         'sell_id',
         'vehicle_id',

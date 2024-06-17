@@ -80,6 +80,9 @@
                             <th>SURNAME</th>
                             <th>TELEPHONE</th>
                             <th>ADDRESS</th>
+                            <th>CITY</th>
+                            <th>POSTAL CODE</th>
+                            <th>COUNTRY</th>
                             <th>EMAIL</th>
                             <th>DETAIL</th>
                         </tr>
@@ -91,7 +94,10 @@
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->surname }}</td>
                                 <td>{{ $client->telephone_num }}</td>
-                                <td>{{ $client->address }}</td>
+                                <td>{{ $client->address->address_name }}</td>
+                                <td>{{ $client->address->city }}</td>
+                                <td>{{ $client->address->postal_code }}</td>
+                                <td>{{ $client->address->country }}</td>
                                 <td>{{ $client->email_address }}</td>
                                 <td>
                                     <a href="{{ route('clients.get', $client) }}" class="ml-4 btn btn-primary">Ver detalle</a>

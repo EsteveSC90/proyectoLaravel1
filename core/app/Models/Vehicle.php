@@ -24,7 +24,7 @@ class Vehicle extends Model
     ];
 
     public function sell_lines() {
-        return $this->hasOne(SellLines::class);
+        return $this->hasMany(SellLines::class);
     }
 
 }
