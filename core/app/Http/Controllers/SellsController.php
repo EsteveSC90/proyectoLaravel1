@@ -17,39 +17,7 @@ class SellsController extends Controller
 {
     public function list()
     {
-
-        $clients = Client::all();
-        foreach($clients as $client) {
-            dd($client->phones->phone1);
-        }
-
-
-
-        //$sells = Sell::paginate(15);
-        $sells = Sell::all();
-        $count = 0;
-        foreach ($sells as $sell) {
-
-            $lines = $sell->lines()->get();
-
-            //dump($lines->sum('total_price'));
-
-            // SELECT SUM(quantity) FROM sells GROUP BY quantity;
-            /*$a = $lines->sum(function ($line) {
-                return $line->quantity * $line->unit_price;
-            });
-            dd($a);*/
-
-            foreach ($lines as $line) {
-                dump($line->vehicle());
-
-//                dump($line->vehicle->registration);
-//                dump($line->vehicle_id);
-            }
-
-            dd("FIN");
-        }
-
+        $sells = Sell::paginate(15);
         $clients = Client::all();
         $sellers = Seller::all();
         $vehicles = Vehicle::all();
@@ -58,7 +26,35 @@ class SellsController extends Controller
 
     public function search(Request $request)
     {
+        $search = $request->input('search');
 
+        $clients = Client::all();
+        $sellers = Seller::all();
+        $vehicles = Vehicle::all();
+
+        $sells = Sell::select('sells.*')
+            ->join('clients', 'sells.client_id', '=', 'clients.id')
+            ->join('sellers', 'sells.seller_id', '=', 'sellers.id')
+            ->where(function ($query) use ($search) {
+                $query->where('clients.dni', 'like', "%$search%")
+                    ->orWhere('clients.name', 'like', "%$search%")
+                    ->orWhere('clients.surname', 'like', "%$search%")
+                    ->orWhere('clients.telephone_num', 'like', "%$search%")
+                    ->orWhere('clients.email_address', 'like', "%$search%")
+                    ->orWhere('sellers.dni', 'like', "%$search%")
+                    ->orWhere('sellers.name', 'like', "%$search%")
+                    ->orWhere('sellers.surname', 'like', "%$search%")
+                    ->orWhere('sellers.telephone_num', 'like', "%$search%")
+                    ->orWhere('sellers.email_address', 'like', "%$search%");
+            })
+            ->orWhereHas('lines', function ($query) use ($search) {
+                $query->whereHas('vehicle', function ($query) use ($search) {
+                    $query->where('registration', 'like', "%$search%");
+                });
+            })
+            ->paginate(15);
+
+        return view('sells.list', compact('sells', 'clients', 'sellers', 'vehicles'));
     }
 
     public function get(Sell $sell)
@@ -91,14 +87,21 @@ class SellsController extends Controller
             // Recuperación del objeto vehículo
             $vehicle = Vehicle::find($vehicle_id);
 
-            // Creación de cada línea de venta
-            SellLines::create([
-                'sell_id' => $sell->id, // ID de la venta creada
+            $sell->lines()->create([
                 'vehicle_id' => $vehicle->id, // ID del vehículo seleccionado
                 'unit_price' => $vehicle->price, // Precio del vehículo
                 'quantity' => $quantity, // Cantidad (formulario)
                 'total_price' => $vehicle->price * $quantity // Total de la línea (precio * cantidad)
             ]);
+
+            // Creación de cada línea de venta
+            /*SellLines::create([
+                'sell_id' => $sell->id, // ID de la venta creada
+                'vehicle_id' => $vehicle->id, // ID del vehículo seleccionado
+                'unit_price' => $vehicle->price, // Precio del vehículo
+                'quantity' => $quantity, // Cantidad (formulario)
+                'total_price' => $vehicle->price * $quantity // Total de la línea (precio * cantidad)
+            ]);*/
         }
 
         return redirect()->route('sells.list')

@@ -22,15 +22,6 @@ class Client extends Model
         return $this->hasMany(Sell::class);
     }
 
-    // TODO
-    // Eliminar columna "address" de la tabla de clients
-    // Hacer tabla address (migration), relación de 1 a 1 con client VS address
-
-    public function phones() {
-        return $this->hasOne(Phone::class);
-    }
-
-
     /**
      * Address
      *
@@ -41,7 +32,11 @@ class Client extends Model
      * country
      * $client->address->city
      */
-
+    // Relación uno a uno con Address
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 
 
 }

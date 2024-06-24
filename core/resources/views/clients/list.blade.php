@@ -15,7 +15,7 @@
                 <form action="{{ route('clients.search') }}" method="get">
                     <label for="search">Búsqueda</label>
                     <input type="text" name="search" value="{{ $search ?? '' }}" class="input-lg" />
-                    <button type="submit" class="ml-4 btn btn btn-danger">Buscar</button>
+                    <button type="submit" class="ml-4 btn btn-danger">Buscar</button>
                 </form>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     @if ($errors->any())
@@ -50,11 +50,16 @@
                         <input type="text" id="surname" name="surname"><br>
                         <label for="telephone">Telephone:</label><br>
                         <input type="tel" id="telephone" name="telephone"><br>
-                        <label for="address">Address:</label><br>
-                        <input type="text" id="address" name="address"><br>
+                        <label for="address_name">Address:</label><br>
+                        <input type="text" id="address_name" name="address_name"><br>
+                        <label for="city">City:</label><br>
+                        <input type="text" id="city" name="city"><br>
+                        <label for="postal_code">Postal Code:</label><br>
+                        <input type="text" id="postal_code" name="postal_code"><br>
+                        <label for="country">Country:</label><br>
+                        <input type="text" id="country" name="country"><br>
                         <label for="email">Email:</label><br>
                         <input type="email" id="email" name="email"><br><br>
-
 
                         <button type="submit" class="btn btn-danger">Guardar</button>
                     </form>
@@ -65,15 +70,8 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-{{--                    <a href="{{ route('main') }}">Volver al menú</a>--}}
                     <table>
                         <tr>
-{{--                            @php--}}
-{{--                                $columns = Schema::getColumnListing('clients');--}}
-{{--                            @endphp--}}
-{{--                            @foreach($columns as $column)--}}
-{{--                                <th>{{ $column }}</th>--}}
-{{--                            @endforeach--}}
                             <th>ID</th>
                             <th>DNI</th>
                             <th>NAME</th>
@@ -94,10 +92,10 @@
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->surname }}</td>
                                 <td>{{ $client->telephone_num }}</td>
-                                <td>{{ $client->address->address_name }}</td>
-                                <td>{{ $client->address->city }}</td>
-                                <td>{{ $client->address->postal_code }}</td>
-                                <td>{{ $client->address->country }}</td>
+                                <td>{{ $client->address ? $client->address->address_name : 'N/A' }}</td>
+                                <td>{{ $client->address ? $client->address->city : 'N/A' }}</td>
+                                <td>{{ $client->address ? $client->address->postal_code : 'N/A' }}</td>
+                                <td>{{ $client->address ? $client->address->country : 'N/A' }}</td>
                                 <td>{{ $client->email_address }}</td>
                                 <td>
                                     <a href="{{ route('clients.get', $client) }}" class="ml-4 btn btn-primary">Ver detalle</a>
@@ -106,7 +104,7 @@
                                     <form action="{{ route('clients.delete', $client) }}" method="post">
                                         {{ csrf_field() }}
                                         {{ method_field('delete') }}
-                                        <button type="submit" class="ml-4 btn btn btn-danger">Eliminar</button>
+                                        <button type="submit" class="ml-4 btn btn-danger">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
