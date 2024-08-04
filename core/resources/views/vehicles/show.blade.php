@@ -12,6 +12,16 @@
         <h3 style="text-align: center">Vehicle</h3>
         <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <h6>Por favor corrige los siguiente errores:</h6>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <form action="{{ route('vehicles.edit', $vehicle) }}" method="post">
                         {{ csrf_field() }}
@@ -23,9 +33,9 @@
                         <div class="form-group">
                             <label for="type">Tipo de vehículo</label>
                             <select name="type" id="type" class="form-control">
-                                <option value="Car" @if($vehicle->type == 'Coche') selected="selected" @endif>Coche</option>
-                                <option value="Motorbike" @if($vehicle->type == 'Motocicleta') selected="selected" @endif>Motocicleta</option>
-                                <option value="Tractor" @if($vehicle->type == 'Tractor') selected="selected" @endif>Tractor</option>
+                                @foreach($types as $value => $name)
+                                    <option value="{{ $value }}" @if($vehicle->type == $value) selected="selected" @endif>{{ $name }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -45,13 +55,15 @@
                         <input type="number" id="price" name="price" step="0.01" value="{{ $vehicle->price }}"><br><br>
 
                         <label for="is_second_hand">Is Second Hand?</label>
-                        <input type="checkbox" id="is_second_hand" name="is_second_hand" @if($vehicle->is_second_hand) checked="checked" @endif><br><br>
+                        <input type="checkbox" id="is_second_hand" name="is_second_hand"
+                               @if($vehicle->is_second_hand) checked="checked" @endif><br><br>
 
                         <label for="km">KM:</label>
                         <input type="number" id="km" name="km" value="{{ $vehicle->km }}"><br><br>
 
                         <label for="is_available">Is Available?</label>
-                        <input type="checkbox" id="is_available" name="is_available" @if($vehicle->is_available) checked="checked" @endif><br><br>
+                        <input type="checkbox" id="is_available" name="is_available"
+                               @if($vehicle->is_available) checked="checked" @endif><br><br>
 
 
                         <button type="submit" class="btn btn-danger">Guardar</button>

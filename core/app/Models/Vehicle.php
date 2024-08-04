@@ -23,6 +23,12 @@ class Vehicle extends Model
         // Agrega aquí otros atributos que desees permitir en asignación masiva
     ];
 
+    const TYPES = [
+        'Car' => 'Coche',
+        'Motorbike' => 'Motocicleta',
+        'Tractor' => 'Tractor'
+    ];
+
     public function sell_lines() {
         return $this->hasMany(SellLines::class);
     }

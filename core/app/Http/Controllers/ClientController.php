@@ -59,21 +59,28 @@ class ClientController extends Controller
             'search' => 'required|string|max:255',
         ]);
 
-        $searchTerm = $request->input('search');
+        $search = $request->input('search');
 
         // Buscar clientes que tengan alguna dirección que coincida con el término de búsqueda
-        $clients = Client::where('dni', $searchTerm) // Búsqueda por DNI en el cliente
-        ->orWhereHas('address', function ($query) use ($searchTerm) {
-            $query->where('address_name', 'like', "%$searchTerm%")
-                ->orWhere('city', 'like', "%$searchTerm%")
-                ->orWhere('postal_code', 'like', "%$searchTerm%")
-                ->orWhere('country', 'like', "%$searchTerm%");
+        $clients = Client::where('dni', $search) // Búsqueda por DNI en el cliente
+        ->orWhereHas('address', function ($query) use ($search) {
+            $query->where('address_name', 'like', "%$search%")
+                ->orWhere('city', 'like', "%$search%")
+                ->orWhere('postal_code', 'like', "%$search%")
+                ->orWhere('country', 'like', "%$search%");
         })
-            ->paginate(5);
+            ->orWhere(function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('surname', 'like', "%$search%")
+                    ->orWhere('telephone_num', 'like', "%$search%")
+                    ->orWhere('email_address', 'like', "%$search%");
+            })
+            ->paginate(5)->withQueryString();
 
         $columns = Schema::getColumnListing('clients');
 
-        return view('clients.list', compact('columns', 'clients'))->with('search', $searchTerm);
+        return view('clients.list', compact('columns', 'clients'))
+            ->with('search', $search);
     }
 
     public function get($id)
@@ -144,12 +151,12 @@ class ClientController extends Controller
             'dni' => ['required', 'string', 'regex:/^\d{8}[a-zA-Z]$/'],
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'telephone' => 'required|string|max:255',
+            'telephone_num' => 'required|string|max:255',
             'address_name' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'postal_code' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email_address' => 'required|string|email|max:255',
         ]);
 
         $client->update($data);

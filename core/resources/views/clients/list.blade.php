@@ -16,6 +16,7 @@
                     <label for="search">Búsqueda</label>
                     <input type="text" name="search" value="{{ $search ?? '' }}" class="input-lg" />
                     <button type="submit" class="ml-4 btn btn-danger">Buscar</button>
+                    <a href="{{ route('clients.list') }}" class="ml-4 btn btn btn-info">Limpiar</a>
                 </form>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     @if ($errors->any())

@@ -26,6 +26,10 @@ class SellsController extends Controller
 
     public function search(Request $request)
     {
+        $request->validate([
+            'search' => 'required|string|max:255',
+        ]);
+
         $search = $request->input('search');
 
         $clients = Client::all();

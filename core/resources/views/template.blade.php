@@ -8,6 +8,9 @@
 
     <title>@yield('title')</title>
 
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    @yield('css')
+
     <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
@@ -19,13 +22,22 @@
 
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
 </head>
 
 <body id="page-top">
-<div class="container">
+{{--<div class="container">--}}
+
+
+<div class="">
 
     @yield('content')
 
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -35,10 +47,7 @@
 
 </div>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
-    <i class="fa fa-angle-up"></i>
-</a>
+
 
 <!-- JavaScript -->
 <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>

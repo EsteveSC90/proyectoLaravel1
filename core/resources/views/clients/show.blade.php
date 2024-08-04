@@ -40,8 +40,8 @@
                             <input type="text" id="surname" name="surname" value="{{ $client->surname }}" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="telephone">Teléfono:</label>
-                            <input type="text" id="telephone" name="telephone" value="{{ $client->telephone_num }}" class="form-control" required>
+                            <label for="telephone_num">Teléfono:</label>
+                            <input type="text" id="telephone_num" name="telephone_num" value="{{ $client->telephone_num }}" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="address_name">Nombre de la Dirección:</label>
@@ -60,8 +60,8 @@
                             <input type="text" id="country" name="country" value="{{ $client->address ? $client->address->country : '' }}" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Correo electrónico:</label>
-                            <input type="email" id="email" name="email" value="{{ $client->email_address }}" class="form-control" required>
+                            <label for="email_address">Correo electrónico:</label>
+                            <input type="email" id="email_address" name="email_address" value="{{ $client->email_address }}" class="form-control" required>
                         </div>
 
                         <button type="submit" class="btn btn-danger">Guardar</button>

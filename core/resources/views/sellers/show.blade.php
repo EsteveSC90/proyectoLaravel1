@@ -31,8 +31,8 @@
                             <input type="text" id="surname" name="surname" value="{{ $seller->surname }}" required>
                         </div>
                         <div>
-                            <label for="telephone">Teléfono:</label>
-                            <input type="text" id="telephone" name="telephone" value="{{ $seller->telephone_num }}" required>
+                            <label for="telephone_num">Teléfono:</label>
+                            <input type="text" id="telephone_num" name="telephone_num" value="{{ $seller->telephone_num }}" required>
                         </div>
                         <div>
                             <label for="address">Dirección:</label>
@@ -40,7 +40,7 @@
                         </div>
                         <div>
                             <label for="email">Correo electrónico:</label>
-                            <input type="email" id="email" name="email" value="{{ $seller->email_address }}" required>
+                            <input type="email" id="email_address" name="email_address" value="{{ $seller->email_address }}" required>
                         </div>
 
                         <button type="submit" class="btn btn-danger">Guardar</button>

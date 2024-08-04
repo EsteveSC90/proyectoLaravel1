@@ -29,10 +29,28 @@ class SellerController extends Controller
 
     public function search(Request $request)
     {
-        $value = $request->query->get('search');
-        $sellers = Seller::where('dni', $value)->get();
+        $data = $request->validate([
+            'search' => 'required|string|max:255',
+        ]);
+
+        //dd($request->input('search')); // recupera del query param
+        //dd($data); // recupera de la variable data
+
+        //$search = $data['search'];
+        $search = $request->input('search');
+
+        $sellers = Seller::where('dni', $search)
+            ->orWhere(function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('surname', 'like', "%$search%")
+                    ->orWhere('telephone_num', 'like', "%$search%")
+                    ->orWhere('address', 'like', "%$search%")
+                    ->orWhere('email_address', 'like', "%$search%");
+            })
+        ->paginate(5)->withQueryString();
+
         $columns = Schema::getColumnListing('seller');
-        return view('sellers.list', compact('columns', 'sellers'));
+        return view('sellers.list', compact('columns', 'sellers', 'search'));
     }
 
     public function get($id)
@@ -71,9 +89,9 @@ class SellerController extends Controller
             'dni' => ['required', 'string', 'regex:/^\d{8}[a-zA-Z]$/'],
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'telephone' => 'required|string|max:255',
+            'telephone_num' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email_address' => 'required|string|email|max:255',
         ]);
 
         $seller->update($data);
