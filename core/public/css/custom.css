@@ -8,7 +8,6 @@ html {
 
 body {
     margin: 0;
-    background: #0b2e13;
 }
 
 a {
@@ -394,4 +393,22 @@ body {
 
 .sm\:justify-start {
     justify-content: center !important;
+}
+
+.color_title {
+    color: darkred;
+}
+
+.footer {
+    background: black;
+    color: white;
+    height: 50px;
+}
+
+/*#page-top{*/
+/*    height: 100vh;*/
+/*}*/
+
+.container-fluid {
+    height: 100vh;
 }
