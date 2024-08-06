@@ -12,6 +12,7 @@ use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
+use mysql_xdevapi\Collection;
 
 class SellsController extends Controller
 {
@@ -63,8 +64,9 @@ class SellsController extends Controller
 
     public function get(Sell $sell)
     {
-        $lines = $sell->lines()->get();
-        return view('sells.show', compact('lines'));
+        $clients = Client::all();
+        $sellers = Seller::all();
+        return view('sells.show', compact('sell', 'sellers', 'clients'));
     }
 
     public function add(Request $request)
@@ -86,30 +88,38 @@ class SellsController extends Controller
             $lines[$v] = $data['quantity'][$key];
         }
 
-        // Recorremos las líneas en formato vehículo => cantidad
-        foreach ($lines as $vehicle_id => $quantity) {
-            // Recuperación del objeto vehículo
-            $vehicle = Vehicle::find($vehicle_id);
+        if ($sell) {
+            $results = collect();
+            // Recorremos las líneas en formato vehículo => cantidad
+            foreach ($lines as $vehicle_id => $quantity) {
+                // Recuperación del objeto vehículo
+                $vehicle = Vehicle::find($vehicle_id);
 
-            $sell->lines()->create([
-                'vehicle_id' => $vehicle->id, // ID del vehículo seleccionado
-                'unit_price' => $vehicle->price, // Precio del vehículo
-                'quantity' => $quantity, // Cantidad (formulario)
-                'total_price' => $vehicle->price * $quantity // Total de la línea (precio * cantidad)
-            ]);
+                $res = $sell->lines()->create([
+                    'vehicle_id' => $vehicle->id, // ID del vehículo seleccionado
+                    'unit_price' => $vehicle->price, // Precio del vehículo
+                    'quantity' => $quantity, // Cantidad (formulario)
+                    'total_price' => $vehicle->price * $quantity // Total de la línea (precio * cantidad)
+                ]);
 
-            // Creación de cada línea de venta
-            /*SellLines::create([
-                'sell_id' => $sell->id, // ID de la venta creada
-                'vehicle_id' => $vehicle->id, // ID del vehículo seleccionado
-                'unit_price' => $vehicle->price, // Precio del vehículo
-                'quantity' => $quantity, // Cantidad (formulario)
-                'total_price' => $vehicle->price * $quantity // Total de la línea (precio * cantidad)
-            ]);*/
+                $results->add($res);
+
+                // Creación de cada línea de venta
+                /*SellLines::create([
+                    'sell_id' => $sell->id, // ID de la venta creada
+                    'vehicle_id' => $vehicle->id, // ID del vehículo seleccionado
+                    'unit_price' => $vehicle->price, // Precio del vehículo
+                    'quantity' => $quantity, // Cantidad (formulario)
+                    'total_price' => $vehicle->price * $quantity // Total de la línea (precio * cantidad)
+                ]);*/
+            }
         }
 
+        //$status = $sell && !in_array(false, $results);
+        $status = $sell && !$results->has(false);
+
         return redirect()->route('sells.list')
-            ->with('result', MessageTools::generate(true,
+            ->with('result', MessageTools::generate($status,
                 ['success' => 'Saved!', 'error' => 'Not saved!'],
                 ['success' => 'Sell added successfully!', 'error' => 'Failed!']
             ));
@@ -117,13 +127,28 @@ class SellsController extends Controller
 
     public function edit(Sell $sell, Request $request)
     {
+        $data = $request->validate([
+            'seller_id' => 'required',
+            'client_id' => 'required'
+        ]);
 
+        $result = $sell->update($data);
+
+        return redirect()->route('sells.get', $sell)
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Updated!', 'error' => 'Not updated!'],
+                ['success' => 'Sell updated successfully!', 'error' => 'Failed!']
+            ));
     }
 
     public function delete(Sell $sell)
     {
-        $sell->delete();
-        return view('sells.show');
+        $result = $sell->delete();
+        return redirect()->route('sells.list')
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Deleted!', 'error' => 'Not deleted!'],
+                ['success' => 'Sell removed successfully!', 'error' => 'Failed!']
+            ));
     }
 
 }

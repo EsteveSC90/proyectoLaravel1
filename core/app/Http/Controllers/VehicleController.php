@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MessageTools;
 use App\Helpers\VehicleBuilder;
 use App\Models\Car;
 use App\Models\Sell;
@@ -109,17 +110,26 @@ class VehicleController extends Controller
         $data['is_second_hand'] = $request->has('is_second_hand') ? 1 : 0;
         $data['is_available'] = $request->has('is_available') ? 1 : 0;
 
-        $vehicle->update($data);
+         $result = $vehicle->update($data);
 
-        // Redireccionar o realizar otras acciones según sea necesario
-        return redirect()->route('vehicles.list')->with('success', 'Vehículo actualizado correctamente');
+        return redirect()->route('vehicles.list')
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Updated!', 'error' => 'Not updated!'],
+                ['success' => 'Vehicle updated successfully!', 'error' => 'Failed!']
+            ));
+
+
     }
 
     public function delete(Vehicle $vehicle)
     {
         $result = $vehicle->delete();
-        // Redireccionar o realizar otras acciones según sea necesario
-        return redirect()->route('vehicles.list')->with('success', 'Vehículo eliminado correctamente');
+        return redirect()->route('vehicles.list')
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Deleted!', 'error' => 'Not deleted!'],
+                ['success' => 'Vehicle deleted successfully!', 'error' => 'Failed!']
+            ));
+
     }
 
 }

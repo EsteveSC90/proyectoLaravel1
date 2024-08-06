@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Schema;
 
 class SellLinesController extends Controller
 {
+
+    public function get(Sell $sell, SellLines $line)
+    {
+        $vehicles = Vehicle::all();
+        return view('sells_lines.show', compact('sell', 'line', 'vehicles'));
+    }
+
     public function add(Sell $sell, Request $request)
     {
         $data = $request->validate([
@@ -30,19 +37,32 @@ class SellLinesController extends Controller
         $sell->lines()->create($data);
     }
 
-    public function edit(SellLines $sell_line, Request $request)
+    public function edit(Sell $sell, SellLines $line, Request $request)
     {
+        $data = $request->validate([
+            'vehicle_id' => 'required',
+            'quantity' => 'required|string|max:255'
+        ]);
 
+        $data['unit_price'] = Vehicle::find($data['vehicle_id'])->price;
+        $data['total_price'] = $data['unit_price'] * $data['quantity'];
+        $result = $line->update($data);
 
-
-        $sell_line->update();
-
+        return redirect()->route('sells.get', $sell)
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Updated!', 'error' => 'Not updated!'],
+                ['success' => 'Sell line updated successfully!', 'error' => 'Failed!']
+            ));
     }
 
-    public function delete(SellLines $sell_line)
+    public function delete(Sell $sell, SellLines $line)
     {
-        $sell_line->delete();
-        return view('sells.show');
+        $result = $line->delete();
+        return redirect()->route('sells.get', $sell)
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Deleted!', 'error' => 'Not deleted!'],
+                ['success' => 'Sell line deleted successfully!', 'error' => 'Failed!']
+            ));
     }
 
 }

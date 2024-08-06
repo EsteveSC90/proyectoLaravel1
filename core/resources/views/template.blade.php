@@ -31,6 +31,18 @@
 
 <div class="">
 
+    @if(session()->has('result'))
+        <script type="text/javascript">
+            Swal.fire({
+                title: '{{ session()->get('result')->title }}',
+                text: '{{ session()->get('result')->message }}',
+                type: '{{ session()->get('result')->type }}',
+                showCancelButton: false,
+                confirmButtonColor: '#C6682A'
+            });
+        </script>
+    @endif
+
     @yield('content')
 
     <!-- Scroll to Top Button-->

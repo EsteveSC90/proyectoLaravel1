@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GetController;
 use App\Http\Controllers\GreetingsController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SellLinesController;
 use App\Http\Controllers\SellsController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WelcomeController;
@@ -58,9 +59,12 @@ Route::delete('/vehiculos/{vehicle}/eliminar/', [VehicleController::class, 'dele
 Route::get('/ventas/', [SellsController::class, 'list'])->name('sells.list'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
 Route::get('/ventas/busqueda', [SellsController::class, 'search'])->name('sells.search'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
 Route::get('/ventas/{sell}', [SellsController::class, 'get'])->name('sells.get');
+Route::get('/ventas/{sell}/lineas/{line}', [SellLinesController::class, 'get'])->name('sells.lines.get');
 Route::post('/ventas/nuevo/', [SellsController::class, 'add'])->name('sells.add');
 Route::put('/ventas/{sell}/actualizar/', [SellsController::class, 'edit'])->name('sells.edit');
+Route::put('/ventas/{sell}/lineas/{line}/actualizar/', [SellLinesController::class, 'edit'])->name('sells.lines.edit');
 Route::delete('/ventas/{sell}/eliminar/', [SellsController::class, 'delete'])->name('sells.delete');
+Route::delete('/ventas/{sell}/lines/{line}/eliminar/', [SellLinesController::class, 'delete'])->name('sells.lines.delete');
 
 //al hacer el post tanto si pongo nuevo como si no, no pasa nada, no? en una url puede haver un get, un post, un delete
 // o puede darse a confucsion si utilizo Route::get('/vehiculos/', y Route::post('/vehiculos/', ?
