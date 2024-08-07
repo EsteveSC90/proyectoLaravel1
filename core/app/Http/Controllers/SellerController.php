@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MessageTools;
 use App\Models\Client;
 use App\Models\Seller;
 use App\Models\Vehicle;
@@ -94,16 +95,27 @@ class SellerController extends Controller
             'email_address' => 'required|string|email|max:255',
         ]);
 
-        $seller->update($data);
+         $result = $seller->update($data);
 
         // Redireccionar o realizar otras acciones según sea necesario
-        return redirect()->route('sellers.list')->with('success', 'Cliente actualizado correctamente');
+        // return redirect()->route('sellers.list')->with('success', 'Cliente actualizado correctamente');
+
+        return redirect()->route('sellers.list')
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Updated!', 'error' => 'Not updated!'],
+                ['success' => 'Sellers updated successfully!', 'error' => 'Failed!']
+            ));
     }
 
     public function delete(Seller $seller)
     {
-        $seller->delete();
+        $result = $seller->delete();
         // Redireccionar o realizar otras acciones según sea necesario
-        return redirect()->route('sellers.list')->with('success', 'Cliente eliminado correctamente');
+        // return redirect()->route('sellers.list')->with('success', 'Cliente eliminado correctamente');
+        return redirect()->route('sellers.list')
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Deleted!', 'error' => 'Not deleted!'],
+                ['success' => 'Sellers deleted successfully!', 'error' => 'Failed!']
+            ));
     }
 }

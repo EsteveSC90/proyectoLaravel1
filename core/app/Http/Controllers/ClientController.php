@@ -159,7 +159,7 @@ class ClientController extends Controller
             'email_address' => 'required|string|email|max:255',
         ]);
 
-        $client->update($data);
+         $result = $client->update($data);
 
         $method = $client->address()->count() > 0 ? 'update' : 'create';
         $client->address()->$method([
@@ -175,15 +175,26 @@ class ClientController extends Controller
             $client->address()->create($address_data);
         }*/
 
-        return redirect()->route('clients.list')->with('success', 'Cliente actualizado correctamente');
+      // return redirect()->route('clients.list')->with('success', 'Cliente actualizado correctamente');
+
+        return redirect()->route('clients.list')
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Updated!', 'error' => 'Not updated!'],
+                ['success' => 'Clients updated successfully!', 'error' => 'Failed!']
+            ));
     }
 
 
     public function delete(Client $client)
     {
-        $client->delete();
+        $result = $client->delete();
         // Redireccionar o realizar otras acciones según sea necesario
-        return redirect()->route('clients.list')->with('success', 'Cliente eliminado correctamente');
+        // return redirect()->route('clients.list')->with('success', 'Cliente eliminado correctamente');
+        return redirect()->route('clients.list')
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Deleted!', 'error' => 'Not deleted!'],
+                ['success' => 'Clients deleted successfully!', 'error' => 'Failed!']
+            ));
     }
 
 }
