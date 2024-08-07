@@ -32,6 +32,7 @@
 <div class="">
 
     @if(session()->has('result'))
+{{--        utilizamos sweet alert--}}
         <script type="text/javascript">
             Swal.fire({
                 title: '{{ session()->get('result')->title }}',
