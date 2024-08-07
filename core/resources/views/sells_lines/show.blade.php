@@ -3,7 +3,7 @@
 @section('title', "Inicio")
 
 @section('css')
-    <link href=""></link>
+
 @endsection
 
 @section('content')

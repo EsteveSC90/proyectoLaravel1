@@ -3,8 +3,48 @@
 @section('title', "Inicio")
 
 @section('css')
-    <link href=""></link>
-@endsection
+    <style>
+        th {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        td {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        td:last-child {
+            padding-bottom: 0px !important;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .action-buttons .btn {
+            margin-bottom: 0;
+        }
+
+    </style>
 
 @section('content')
 
@@ -83,6 +123,8 @@
                             <th>SELLER</th>
                             <th>TOTAL</th>
                             <th>DATE</th>
+                            <th>ACTION</th>
+                            <th>ACTION</th>
                         </tr>
 
                         @foreach($sells as $sell)
