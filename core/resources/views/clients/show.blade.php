@@ -3,17 +3,17 @@
 @section('title', "Editar Cliente")
 
 @section('css')
-    <link href=""></link> {{-- Coloca aquí tus estilos CSS si es necesario --}}
+
 @endsection
 
 @section('content')
 
     <div class="container-fluid">
-        <h3 style="text-align: center">Editar Cliente</h3>
+        <h3 class="text-center">Editar Cliente</h3>
         <div class="row">
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" class="col-md-12 px-4">
                 @if ($errors->any())
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger mb-4">
                         <h6>Por favor corrige los siguientes errores:</h6>
                         <ul>
                             @foreach($errors->all() as $error)
@@ -22,6 +22,7 @@
                         </ul>
                     </div>
                 @endif
+
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <form action="{{ route('clients.edit', $client) }}" method="POST">
                         @csrf
@@ -71,7 +72,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="text-center mt-4">
         <a href="{{ route('clients.list') }}" class="btn btn-primary">Volver</a>
     </div>
 

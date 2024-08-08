@@ -3,7 +3,63 @@
 @section('title', "Inicio")
 
 @section('css')
-    <link href=""></link>
+    <style>
+
+        .container-fluid {
+            padding: 0; /* Elimina el padding del contenedor */
+            margin: 0; /* Elimina el margin del contenedor */
+        }
+
+        th {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        td {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        td:last-child {
+            padding-bottom: 0px !important;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0; /* Elimina el margen de la tabla */
+            padding: 0; /* Elimina el padding de la tabla */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .action-buttons .btn {
+            margin-bottom: 0;
+        }
+
+        td:last-child {
+            padding-bottom: 0px !important;
+        }
+
+    </style>
+
 @endsection
 
 @section('content')
@@ -11,10 +67,10 @@
     <div class="container-fluid">
         <h3 style="text-align: center">Sellers</h3>
         <div class="row">
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" class="col-md-12 px-4"> <!-- Cambié col-md-9 col-lg-10 a col-md-12 -->
                 @if ($errors->any())
                     <div class="alert alert-danger">
-                        <h6>Por favor corrige los siguiente errores:</h6>
+                        <h6>Por favor corrige los siguientes errores:</h6>
                         <ul>
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -25,8 +81,8 @@
                 <form action="{{ route('sellers.search') }}" method="get">
                     <label for="search">Búsqueda</label>
                     <input type="text" name="search" value="{{ $search ?? '' }}" class="input-lg" />
-                    <button type="submit" class="ml-4 btn btn btn-danger">Buscar</button>
-                    <a href="{{ route('sellers.list') }}" class="ml-4 btn btn btn-info">Limpiar</a>
+                    <button type="submit" class="ml-4 btn btn-danger">Buscar</button>
+                    <a href="{{ route('sellers.list') }}" class="ml-4 btn btn-info">Limpiar</a>
                 </form>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <form action="{{ route('sellers.add') }}" method="POST" id="formulario" style="display: none">
@@ -45,7 +101,6 @@
                         <label for="email">Email:</label><br>
                         <input type="email" id="email" name="email"><br><br>
 
-
                         <button type="submit" class="btn btn-danger">Guardar</button>
                     </form>
 
@@ -53,17 +108,11 @@
                 </div>
             </main>
 
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" class="col-md-12 px-4"> <!-- Cambié col-md-9 col-lg-10 a col-md-12 -->
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-
                     <table>
+                        <thead>
                         <tr>
-{{--                            @php--}}
-{{--                                $columns = Schema::getColumnListing('sellers');--}}
-{{--                            @endphp--}}
-{{--                            @foreach($columns as $column)--}}
-{{--                                <th>{{ $column }}</th>--}}
-{{--                            @endforeach--}}
                             <th>ID</th>
                             <th>DNI</th>
                             <th>NAME</th>
@@ -72,9 +121,11 @@
                             <th>ADDRESS</th>
                             <th>EMAIL</th>
                             <th>DETAIL</th>
+                            <th>DELETE</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         @foreach($sellers as $seller)
-
                             <tr>
                                 <td>{{ $seller->id }}</td>
                                 <td>{{ $seller->dni }}</td>
@@ -84,17 +135,18 @@
                                 <td>{{ $seller->address }}</td>
                                 <td>{{ $seller->email_address }}</td>
                                 <td>
-                                    <a href="{{ route('sellers.get', $seller) }} " class="ml-4 btn btn-primary">Ver detalle</a>
+                                    <a href="{{ route('sellers.get', $seller) }}" class="ml-4 btn btn-primary">Ver detalle</a>
                                 </td>
                                 <td>
                                     <form action="{{ route('sellers.delete', $seller) }}" method="post">
                                         {{ csrf_field() }}
                                         {{ method_field('delete') }}
-                                        <button type="submit" class="ml-4 btn btn btn-danger">Eliminar</button>
+                                        <button type="submit" class="ml-4 btn btn-danger">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
+                        </tbody>
                     </table>
                 </div>
                 {{ $sellers->links('pagination.custom') }}
@@ -102,9 +154,10 @@
         </div>
     </div>
 
-    <div>
+    <div class="text-center mt-4">
         <a href="{{ url('/') }}" class="ml-4 btn btn-primary">Ir a la página de inicio</a>
     </div>
+
 
 @endsection
 
