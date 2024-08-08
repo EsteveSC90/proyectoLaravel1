@@ -53,13 +53,14 @@
         <h3 class="text-center">Sells</h3>
         <div class="row">
             <main role="main" class="col-md-12 px-4">
-                <form action="{{ route('sells.search') }}" method="get" class="mb-4">
-                    <label for="search">Búsqueda</label>
-                    <input type="text" name="search" value="{{ $search ?? '' }}" class="form-control" />
-                    <button type="submit" class="btn btn-danger mt-2">Buscar</button>
-                    <a href="{{ route('sells.list') }}" class="btn btn-info mt-2">Limpiar</a>
-                </form>
-
+                <div class="d-flex justify-content-center">
+                    <form action="{{ route('sells.search') }}" method="get">
+                        <label for="search">Búsqueda</label>
+                        <input type="text" name="search" value="{{ $search ?? '' }}" class="input-lg" />
+                        <button type="submit" class="ml-4 btn btn-danger">Buscar</button>
+                        <a href="{{ route('sells.list') }}" class="ml-4 btn btn-info">Limpiar</a>
+                    </form>
+                </div>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     @if ($errors->any())
                         <div class="alert alert-danger">

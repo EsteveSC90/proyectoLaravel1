@@ -3,7 +3,34 @@
 @section('title', "Inicio")
 
 @section('css')
-    <link href=""></link>
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            flex: 0 0 150px; /* Ajusta este valor según el ancho deseado */
+            margin-bottom: 0;
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        .form-group input {
+            flex: 1;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .form-actions .btn {
+            margin: 0 10px; /* Espaciado entre botones */
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -12,7 +39,7 @@
         <h3 class="text-center">Seller</h3>
         <div class="row">
             <main role="main" class="col-md-12 px-4">
-                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom d-flex justify-content-center">
                     @if ($errors->any())
                         <div class="alert alert-danger mb-4">
                             <h6>Por favor corrige los siguientes errores:</h6>
@@ -52,7 +79,9 @@
                             <input type="email" id="email_address" name="email_address" value="{{ $seller->email_address }}" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="btn btn-danger">Guardar</button>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-danger">Guardar</button>
+                        </div>
                     </form>
                 </div>
             </main>
@@ -60,7 +89,7 @@
     </div>
 
     <div class="text-center mt-4">
-        <a href="{{ URL::previous() }}" class="btn btn-primary">Volver</a>
+        <a href="{{ route('sellers.list') }}" class="btn btn-primary">Volver</a>
     </div>
 
 @endsection

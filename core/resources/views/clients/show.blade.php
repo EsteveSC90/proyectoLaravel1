@@ -3,7 +3,34 @@
 @section('title', "Editar Cliente")
 
 @section('css')
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
 
+        .form-group label {
+            flex: 0 0 150px; /* Ajusta este valor según el ancho deseado */
+            margin-bottom: 0;
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        .form-group input {
+            flex: 1;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .form-actions .btn {
+            margin: 0 10px; /* Espaciado entre botones */
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -23,7 +50,7 @@
                     </div>
                 @endif
 
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom d-flex justify-content-center">
                     <form action="{{ route('clients.edit', $client) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -65,7 +92,9 @@
                             <input type="email" id="email_address" name="email_address" value="{{ $client->email_address }}" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="btn btn-danger">Guardar</button>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-danger">Guardar</button>
+                        </div>
                     </form>
                 </div>
             </main>
@@ -73,7 +102,7 @@
     </div>
 
     <div class="text-center mt-4">
-        <a href="{{ route('clients.list') }}" class="btn btn-primary">Volver</a>
+        <a href="{{ route('vehicles.list') }}" class="btn btn-primary">Volver</a>
     </div>
 
 @endsection

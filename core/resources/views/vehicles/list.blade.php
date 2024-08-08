@@ -72,12 +72,14 @@
         <div class="row">
 
             <main role="main" class="col-md-12 px-4"> <!-- Cambié col-md-9 col-lg-10 a col-md-12 -->
-                <form action="{{ route('vehicles.search') }}" method="get">
-                    <label for="search">Búsqueda</label>
-                    <input type="text" name="search" value="{{ $search ?? '' }}" class="input-lg" />
-                    <button type="submit" class="ml-4 btn btn-danger">Buscar</button>
-                    <a href="{{ route('vehicles.list') }}" class="ml-4 btn btn-info">Limpiar</a>
-                </form>
+                <div class="text-center">
+                    <form action="{{ route('vehicles.search') }}" method="get">
+                        <label for="search">Búsqueda</label>
+                        <input type="text" name="search" value="{{ $search ?? '' }}" class="input-lg" />
+                        <button type="submit" class="ml-4 btn btn-danger">Buscar</button>
+                        <a href="{{ route('vehicles.list') }}" class="ml-4 btn btn-info">Limpiar</a>
+                    </form>
+                </div>
 
                 <main role="main" class="col-md-12 px-4"> <!-- Cambié col-md-9 col-lg-10 a col-md-12 -->
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -179,7 +181,9 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $vehicles->links('pagination.custom') }}
+                <div class="d-flex justify-content-center">
+                    {{ $vehicles->links('pagination.custom') }}
+                </div>
             </main>
         </div>
     </div>
