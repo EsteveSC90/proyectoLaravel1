@@ -44,12 +44,27 @@
             margin-bottom: 0;
         }
 
+        .footer {
+            background: black;
+            color: white;
+            height: 55px;
+        }
+
+        .row {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+        }
+
+        .view-height {
+            margin-bottom: 30rem;
+        }
+
     </style>
 @endsection
 
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container-fluid view-height">
         <h3 class="text-center">Sells</h3>
         <div class="row">
             <main role="main" class="col-md-12 px-4">
@@ -150,11 +165,12 @@
                 {{ $sells->links('pagination.custom') }}
             </main>
         </div>
+        <div class="text-center mt-4">
+            <a href="{{ url('/') }}" class="btn btn-primary">Ir a la página de inicio</a>
+        </div>
     </div>
 
-    <div class="text-center mt-4">
-        <a href="{{ url('/') }}" class="btn btn-primary">Ir a la página de inicio</a>
-    </div>
+
 
 
 @endsection

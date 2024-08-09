@@ -52,8 +52,8 @@
     </a>
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p class="text-center">Copyright &copy; {{ date('Y') }}</p>
+        <div class="container d-flex justify-content-center align-items-center" style="height: 100%;">
+            <p class="text-center mb-0">Copyright © 2024</p>
         </div>
     </footer>
 

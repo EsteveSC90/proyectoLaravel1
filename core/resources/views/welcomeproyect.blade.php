@@ -370,17 +370,17 @@
                 }
             }
 
-            .scroll-to-top {
-                border-radius: 50%;
-                background-color: #2563eb; !* bg-blue-600 *!
-                color: #ffffff; !* text-white *!
-                padding: 0.5rem; !* p-2 *!
-                transition: background-color 0.3s;
-            }
+            /*.scroll-to-top {*/
+            /*    border-radius: 50%;*/
+            /*    background-color: #2563eb; !* bg-blue-600 *!*/
+            /*    color: #ffffff; !* text-white *!*/
+            /*    padding: 0.5rem; !* p-2 *!*/
+            /*    transition: background-color 0.3s;*/
+            /*}*/
 
-            .scroll-to-top:hover {
-                background-color: #1e40af; !* hover:bg-blue-800 *!
-            }
+            /*.scroll-to-top:hover {*/
+            /*    background-color: #1e40af; !* hover:bg-blue-800 *!*/
+            /*}*/
 
             .flex.items-center > div {
                 margin-left: 1rem; !* Tailwind's ml-4 *!

@@ -31,12 +31,27 @@
         .form-actions .btn {
             margin: 0 10px; /* Espaciado entre botones */
         }
+
+        .footer {
+            background: black;
+            color: white;
+            height: 55px;
+        }
+
+        .row {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+        }
+
+        .view-height {
+            margin-bottom: 30rem;
+        }
     </style>
 @endsection
 
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container-fluid view-height">
         <h3 class="text-center">Vehicle</h3>
         <div class="row">
             <main role="main" class="col-md-12 px-4">
@@ -108,11 +123,12 @@
                 </div>
             </main>
         </div>
+        <div class="text-center mt-4">
+            <a href="{{ route('vehicles.list') }}" class="btn btn-primary">Volver</a>
+        </div>
     </div>
 
-    <div class="text-center mt-4">
-        <a href="{{ route('vehicles.list') }}" class="btn btn-primary">Volver</a>
-    </div>
+
 
 
 

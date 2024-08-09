@@ -31,14 +31,30 @@
         .form-actions .btn {
             margin: 0 10px; /* Espaciado entre botones */
         }
+
+        .footer {
+            background: black;
+            color: white;
+            height: 55px;
+        }
+
+        .row {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+        }
+
+        .view-height {
+            margin-bottom: 30rem;
+        }
+
     </style>
 @endsection
 
 @section('content')
 
-    <div class="container-fluid border-bottom">
+    <div class="container-fluid view-height">
         <h3 class="text-center">Sell Line</h3>
-        <div class="row">
+        <div class="row border-bottom">
             <main role="main" class="col-md-12 px-4 d-flex justify-content-center">
                 @if ($errors->any())
                     <div class="alert alert-danger mb-3">
@@ -79,11 +95,12 @@
                 </div>
             </main>
         </div>
+        <div class="text-center mt-3">
+            <a href="{{ route('sells.list') }}" class="btn btn-primary">Volver</a>
+        </div>
     </div>
 
-    <div class="text-center mt-3">
-        <a href="{{ route('sells.list') }}" class="btn btn-primary">Volver</a>
-    </div>
+
 
 @endsection
 

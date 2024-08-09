@@ -30,12 +30,28 @@
         .form-actions .btn {
             margin: 0 10px; /* Espaciado entre botones */
         }
+
+        .footer {
+            background: black;
+            color: white;
+            height: 55px;
+        }
+
+        .row {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+        }
+
+        .view-height {
+            margin-bottom: 30rem;
+        }
+
     </style>
 @endsection
 
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container-fluid view-height">
         <h3 class="text-center">Seller</h3>
         <div class="row">
             <main role="main" class="col-md-12 px-4">
