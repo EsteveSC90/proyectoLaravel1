@@ -59,37 +59,46 @@ class VehicleController extends Controller
 
     public function add(Request $request)
     {
-        $request->validate([
-            'type' => 'required|in:Car,Motorbike,Tractor',
-            'registration' => 'required|string|max:255|unique:vehicles',
-//            'brand' => 'required|string|max:255',
-//            'color' => 'required|string|max:255',
-//            'price' => 'required|numeric|min:0',
-//            'km' => 'required|numeric|min:0',
-        ]);
+        try{
+            $request->validate([
+                'type' => 'required|in:Car,Motorbike,Tractor',
+                'registration' => 'required|string|max:255|unique:vehicles',
+    //            'brand' => 'required|string|max:255',
+    //            'color' => 'required|string|max:255',
+    //            'price' => 'required|numeric|min:0',
+    //            'km' => 'required|numeric|min:0',
+            ]);
 
-        // Get wheels and seats from model
-        $model = "\App\Models\\" . ucfirst($request->type);
-        $wheels = $model::$WHEELS;
-        $seats = $model::$SEATS;
+            // Get wheels and seats from model
+            $model = "\App\Models\\" . ucfirst($request->type);
+            $wheels = $model::$WHEELS;
+            $seats = $model::$SEATS;
 
-        // Guarda el vehículo en la base de datos
-        Vehicle::create([
-            'registration' => $request->registration,
-            'type' => $request->type,
-            'brand' => $request->brand,
-            'wheels' => $wheels,
-            'seats' => $seats,
-            'color' => $request->color,
-            'price' => $request->price,
-            'is_second_hand' => $request->has('is_second_hand') ? true : false,
-            'km' => $request->km,
-            'is_available' => $request->has('is_available') ? true : false,
-            // Otros campos del formulario
-        ]);
+            // Guarda el vehículo en la base de datos
+            Vehicle::create([
+                'registration' => $request->registration,
+                'type' => $request->type,
+                'brand' => $request->brand,
+                'wheels' => $wheels,
+                'seats' => $seats,
+                'color' => $request->color,
+                'price' => $request->price,
+                'is_second_hand' => $request->has('is_second_hand') ? true : false,
+                'km' => $request->km,
+                'is_available' => $request->has('is_available') ? true : false,
+                // Otros campos del formulario
+            ]);
 
-        // Redireccionar o realizar otras acciones según sea necesario
-        return redirect()->route('vehicles.list')->with('success', 'Vehículo creado correctamente');
+            $result = true;
+        } catch (\Exception $e) {
+            $result = false;
+        }
+
+        return redirect()->route('vehicles.list')
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Vehículo creado exitosamente.', 'error' => 'Error al crear el vehículo.'],
+                ['success' => 'Operación exitosa', 'error' => 'Operación fallida']
+            ));
 
     }
 

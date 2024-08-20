@@ -71,17 +71,27 @@ class SellerController extends Controller
             'email' => 'required|email',
         ]);
 
-        $client = new Seller();
-        $client->dni = $request->dni;
-        $client->name = $request->name;
-        $client->surname = $request->surname;
-        $client->telephone_num = $request->telephone;
-        $client->address = $request->address;
-        $client->email_address = $request->email;
-        $client->save();
+
+        try {
+            $client = new Seller();
+            $client->dni = $request->dni;
+            $client->name = $request->name;
+            $client->surname = $request->surname;
+            $client->telephone_num = $request->telephone;
+            $client->address = $request->address;
+            $client->email_address = $request->email;
+            $client->save();
+
+            $result = true; // Asume que la creación fue exitosa
+        } catch (\Exception $e) {
+            $result = false;
+        }
 
         return redirect()->route('sellers.list')
-            ->with('success', 'Client added successfully!');
+            ->with('result', MessageTools::generate($result,
+                ['success' => 'Saved!', 'error' => 'Not saved!'],
+                ['success' => 'Client added successfully!', 'error' => 'Failed!']
+            ));
     }
 
     public function edit(Seller $seller, Request $request)
