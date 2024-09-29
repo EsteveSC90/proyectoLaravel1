@@ -79,6 +79,7 @@
                         <input type="text" name="search" value="{{ $search ?? '' }}" class="input-lg" />
                         <button type="submit" class="ml-4 btn btn btn-danger">Buscar</button>
                         <a href="{{ route('sells.list') }}" class="ml-4 btn btn btn-info">Limpiar</a>
+                        <a href="{{ route('report.sellers') }}" class="ml-4 btn btn btn-info">Informe de ventas</a>
                     </form>
                 </div>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

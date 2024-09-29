@@ -2,54 +2,6 @@
 
 @section('title', "Inicio")
 
-@section('css')
-    <style>
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            flex: 0 0 150px; /* Ajusta este valor según el ancho deseado */
-            margin-bottom: 0;
-            margin-right: 10px;
-            text-align: right;
-        }
-
-        .form-group select,
-        .form-group input {
-            flex: 1;
-        }
-
-        .form-actions {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .form-actions .btn {
-            margin: 0 10px; /* Espaciado entre botones */
-        }
-
-        .footer {
-            background: black;
-            color: white;
-            height: 55px;
-        }
-
-        .row {
-            margin-right: 0px !important;
-            margin-left: 0px !important;
-        }
-
-        .view-height {
-            margin-bottom: 30rem;
-        }
-
-    </style>
-@endsection
-
 @section('content')
 
     <div class="container-fluid view-height">
@@ -96,7 +48,7 @@
             </main>
         </div>
         <div class="text-center mt-3">
-            <a href="{{ route('sells.list') }}" class="btn btn-primary">Volver</a>
+            <a href="{{ route('sells.get', $sell) }}" class="btn btn-primary">Volver</a>
         </div>
     </div>
 

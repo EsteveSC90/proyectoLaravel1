@@ -5,6 +5,7 @@ use App\Http\Controllers\GetController;
 use App\Http\Controllers\GreetingsController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SellLinesController;
+use App\Http\Controllers\SellReportController;
 use App\Http\Controllers\SellsController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WelcomeController;
@@ -65,6 +66,10 @@ Route::put('/ventas/{sell}/actualizar/', [SellsController::class, 'edit'])->name
 Route::put('/ventas/{sell}/lineas/{line}/actualizar/', [SellLinesController::class, 'edit'])->name('sells.lines.edit');
 Route::delete('/ventas/{sell}/eliminar/', [SellsController::class, 'delete'])->name('sells.delete');
 Route::delete('/ventas/{sell}/lines/{line}/eliminar/', [SellLinesController::class, 'delete'])->name('sells.lines.delete');
+
+// REPORTS
+Route::get('/informes/vendedores', [SellReportController::class, 'sellers'])->name('report.sellers'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
+Route::get('/informes/vendedores/buscar', [SellReportController::class, 'search'])->name('report.sellers.search'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
 
 //al hacer el post tanto si pongo nuevo como si no, no pasa nada, no? en una url puede haver un get, un post, un delete
 // o puede darse a confucsion si utilizo Route::get('/vehiculos/', y Route::post('/vehiculos/', ?
