@@ -70,6 +70,8 @@ Route::delete('/ventas/{sell}/lines/{line}/eliminar/', [SellLinesController::cla
 // REPORTS
 Route::get('/informes/vendedores', [SellReportController::class, 'sellers'])->name('report.sellers'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
 Route::get('/informes/vendedores/buscar', [SellReportController::class, 'search'])->name('report.sellers.search'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
+Route::get('/informes/vendedores/pdf', [SellReportController::class, 'pdf'])->name('report.sellers.pdf'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
+Route::get('/informes/vendedores/charts', [SellReportController::class, 'charts'])->name('report.sellers.charts'); // lleva al template wellcome.blade.php, pero le pasamos una variable que es un array
 
 //al hacer el post tanto si pongo nuevo como si no, no pasa nada, no? en una url puede haver un get, un post, un delete
 // o puede darse a confucsion si utilizo Route::get('/vehiculos/', y Route::post('/vehiculos/', ?

@@ -22,4 +22,9 @@ class Seller extends Model
         return $this->hasMany(Sell::class);
     }
 
+    public function getFullName()
+    {
+        return $this->name . ' ' . $this->surname;
+    }
+
 }
