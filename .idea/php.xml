@@ -211,7 +211,6 @@
       <path value="$PROJECT_DIR$/core/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/core/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/core/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/core/vendor/symfony/polyfill-php72" />
       <path value="$PROJECT_DIR$/core/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/core/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/core/vendor/symfony/polyfill-uuid" />
@@ -321,6 +320,12 @@
       <path value="$PROJECT_DIR$/core/example-app/vendor/tijsverkoyen/css-to-inline-styles" />
       <path value="$PROJECT_DIR$/core/example-app/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/core/example-app/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/core/vendor/barryvdh/laravel-dompdf" />
+      <path value="$PROJECT_DIR$/core/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/core/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/core/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/core/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/core/vendor/sabberworm/php-css-parser" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
@@ -330,8 +335,6 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/core/example-app/phpunit.xml" custom_loader_path="$PROJECT_DIR$/core/example-app/vendor/autoload.php" use_configuration_file="true" />
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/core/example-app/phpunit.xml" custom_loader_path="$PROJECT_DIR$/core/example-app/vendor/autoload.php" use_configuration_file="true" />
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/core/phpunit.xml" custom_loader_path="$PROJECT_DIR$/core/vendor/autoload.php" use_configuration_file="true" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
